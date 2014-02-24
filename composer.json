@@ -1,0 +1,14 @@
+{
+    "name": "echosa/gopher-php",
+    "require-dev": {
+        "phpunit/phpunit": "3.7.27"
+    },
+    "autoload": {
+        "psr-0": {
+            "Gopher\\": [
+                "src/",
+                "test/"
+            ]
+        }
+    }
+}
