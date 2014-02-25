@@ -1,0 +1,4 @@
+* gopher-php TODO list
+** TODO Make the Gopher and PhlogMap classes iterable
+   Could help clean up and clarify usage.
+** TODO Refactor out strings and heredocs in unit tests
