@@ -1,9 +1,10 @@
 <?php
 namespace Gopher;
 
-class PhlogMap
+class PhlogMap implements \Iterator
 {
-    private $entries = array();
+    private $_entries = array();
+    private $_position = 0;
 
     public function __construct(Gopher $gopher = null)
     {
@@ -14,12 +15,12 @@ class PhlogMap
 
     public function getEntries()
     {
-        return $this->entries;
+        return $this->_entries;
     }
 
     public function addEntry(PhlogEntry $entry)
     {
-        $this->entries[] = $entry;
+        $this->_entries[] = $entry;
     }
 
     public function parseGopher(Gopher $gopher)
@@ -55,6 +56,31 @@ class PhlogMap
     public function getPage($page, $entriesPerPage = 10)
     {
         $start = ($page - 1) * $entriesPerPage;
-        return array_slice($this->entries, $start, $entriesPerPage);
+        return array_slice($this->_entries, $start, $entriesPerPage);
+    }
+
+    public function current()
+    {
+        return $this->_entries[$this->_position];
+    }
+
+    public function next()
+    {
+        ++$this->_position;
+    }
+
+    public function rewind()
+    {
+        $this->_position = 0;
+    }
+
+    public function key()
+    {
+        return $this->_position;
+    }
+
+    public function valid()
+    {
+        return isset($this->_entries[$this->_position]);
     }
 }

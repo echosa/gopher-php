@@ -5,24 +5,29 @@ use Gopher\Providers\GopherProviders;
 
 class PhlogMapTest extends \PHPUnit_Framework_TestCase
 {
-    private $phlogMap;
+    private $_phlogMap;
 
     public function setUp()
     {
-        $this->phlogMap = new PhlogMap();
+        $this->_phlogMap = new PhlogMap();
+    }
+
+    public function testPhlogMapShouldImplementIterator()
+    {
+        $this->assertInstanceOf('Iterator', $this->_phlogMap);
     }
 
     public function testNewPhlogMapHasNoEntries()
     {
-        $this->assertCount(0, $this->phlogMap->getEntries());
+        $this->assertCount(0, $this->_phlogMap->getEntries());
     }
 
     public function testAddingPhlogEntry()
     {
         $phlogHeader = new GopherItem('--Phlog Header--');
         $entry = new PhlogEntry($phlogHeader);
-        $this->phlogMap->addEntry($entry);
-        $entries = $this->phlogMap->getEntries();
+        $this->_phlogMap->addEntry($entry);
+        $entries = $this->_phlogMap->getEntries();
         $this->assertSame($entry, $entries[0]);
     }
 
@@ -54,34 +59,34 @@ class PhlogMapTest extends \PHPUnit_Framework_TestCase
     public function testGettingPhlogEntryForFile()
     {
         $gopher = new Gopher(GopherProviders::GOPHER_MAP);
-        $this->phlogMap->parseGopher($gopher);
-        $entry = $this->phlogMap->getEntryForFile('0005-infinity-blade-3');
+        $this->_phlogMap->parseGopher($gopher);
+        $entry = $this->_phlogMap->getEntryForFile('0005-infinity-blade-3');
         $this->assertTitle('--Infinity Blade III--', $entry);
 
-        $entries = $this->phlogMap->getEntries();
+        $entries = $this->_phlogMap->getEntries();
         $this->assertSame($entry, $entries[1]);
     }
 
     public function testPhlogItemsDoNotHaveBlankLastItem()
     {
         $gopher = new Gopher(GopherProviders::GOPHER_MAP);
-        $this->phlogMap->parseGopher($gopher);
-        $entry = $this->phlogMap->getEntryForFile('0005-infinity-blade-3');
+        $this->_phlogMap->parseGopher($gopher);
+        $entry = $this->_phlogMap->getEntryForFile('0005-infinity-blade-3');
         $this->assertCount(5, $entry->getBodyItems());
     }
 
     public function testPaginationReturnsOnlySecondItem()
     {
-        $this->phlogMap->parseGopher(new Gopher(GopherProviders::GOPHER_MAP));
-        $entries = $this->phlogMap->getPage(2,1);
+        $this->_phlogMap->parseGopher(new Gopher(GopherProviders::GOPHER_MAP));
+        $entries = $this->_phlogMap->getPage(2,1);
         $this->assertCount(1, $entries);
         $this->assertTitle('--Infinity Blade III--', $entries[0]);
     }
 
     public function testPaginationReturnsOnlyThirdItem()
     {
-        $this->phlogMap->parseGopher(new Gopher(GopherProviders::GOPHER_MAP));
-        $entries = $this->phlogMap->getPage(2,2);
+        $this->_phlogMap->parseGopher(new Gopher(GopherProviders::GOPHER_MAP));
+        $entries = $this->_phlogMap->getPage(2,2);
         $this->assertCount(1, $entries);
         $this->assertTitle('--Bitmessage--', $entries[0]);
     }
@@ -108,8 +113,8 @@ class PhlogMapTest extends \PHPUnit_Framework_TestCase
     private function getPhlogEntries()
     {
         $gopher = new Gopher(GopherProviders::GOPHER_MAP);
-        $this->phlogMap->parseGopher($gopher);
-        return $this->phlogMap->getEntries();
+        $this->_phlogMap->parseGopher($gopher);
+        return $this->_phlogMap->getEntries();
     }
 
     private function getPhlogFooter($filename)
