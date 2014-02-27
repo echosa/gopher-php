@@ -5,13 +5,13 @@ use Gopher\Exception\NotPhlogHeaderException;
 
 class PhlogEntryTest extends \PHPUnit_Framework_TestCase
 {
-    private $phlogEntry;
-    private $title;
+    private $_phlogEntry;
+    private $_title;
 
     public function setUp()
     {
-        $this->title = new GopherItem('--Test Phlog Entry--');
-        $this->phlogEntry = new PhlogEntry($this->title);
+        $this->_title = new GopherItem('--Test Phlog Entry--');
+        $this->_phlogEntry = new PhlogEntry($this->_title);
     }
 
     /**
@@ -25,14 +25,14 @@ class PhlogEntryTest extends \PHPUnit_Framework_TestCase
 
     public function testNewPhlogEntryHasNoBodyItems()
     {
-        $this->assertCount(0, $this->phlogEntry->getBodyItems());
+        $this->assertCount(0, $this->_phlogEntry->getBodyItems());
     }
 
     public function testAddBodyItemToPhlogEntry()
     {
         $gopherItem = new GopherItem('foobar');
-        $this->phlogEntry->addBodyItem($gopherItem);
-        $items = $this->phlogEntry->getBodyItems();
+        $this->_phlogEntry->addBodyItem($gopherItem);
+        $items = $this->_phlogEntry->getBodyItems();
         $this->assertSame($gopherItem, $items[0]);
     }
 }

@@ -3,7 +3,7 @@ namespace Gopher;
 
 class GopherItemTest extends \PHPUnit_Framework_TestCase
 {
-    private $footerText = 'Continued...';
+    private $_footerText = 'Continued...';
 
     public function testSettingFileUrl()
     {
@@ -25,68 +25,68 @@ class GopherItemTest extends \PHPUnit_Framework_TestCase
 
     public function testPhlogHeaderIsProperlyIdentified()
     {
-        $this->assertIsPhlogHeader(new GopherItem('--Proper Header--'));
+        $this->_assertIsPhlogHeader(new GopherItem('--Proper Header--'));
     }
 
     public function testPhlogHeaderWithoutEndingDashesIsWrong()
     {
-        $this->assertIsNotPhlogHeader(new GopherItem('--No Ending Dashes'));
+        $this->_assertIsNotPhlogHeader(new GopherItem('--No Ending Dashes'));
     }
 
     public function testPhlogHeaderWithoutStartingDashesIsWrong()
     {
-        $this->assertIsNotPhlogHeader(new GopherItem('No Starting Dashes--'));
+        $this->_assertIsNotPhlogHeader(new GopherItem('No Starting Dashes--'));
     }
 
     public function testPhlogHeaderWithoutAnyDashesIsWrong()
     {
-        $this->assertIsNotPhlogHeader(new GopherItem('No Dashes At All'));
+        $this->_assertIsNotPhlogHeader(new GopherItem('No Dashes At All'));
     }
 
     public function testPhlogFooterIsProperlyIdentified()
     {
-        $footer = new GopherItem($this->footerText);
+        $footer = new GopherItem($this->_footerText);
         $footer->setFileUrl('foo.txt');
-        $this->assertIsPhlogFooter($footer);
+        $this->_assertIsPhlogFooter($footer);
     }
 
     public function testNonFileItemIsNotAFooter()
     {
-        $this->assertIsNotPhlogFooter(new GopherItem($this->footerText));
+        $this->_assertIsNotPhlogFooter(new GopherItem($this->_footerText));
     }
 
     public function testDirectoryItemIsNotAFooter()
     {
-        $footer = new GopherItem($this->footerText);
+        $footer = new GopherItem($this->_footerText);
         $footer->setDirectoryUrl('foo');
-        $this->assertIsNotPhlogFooter($footer);
+        $this->_assertIsNotPhlogFooter($footer);
     }
 
     public function testWrongTextIsNotAFooter()
     {
-        $footer = new GopherItem($this->footerText . 'wrong');
+        $footer = new GopherItem($this->_footerText . 'wrong');
         $footer->setFileUrl('foo.txt');
-        $this->assertIsNotPhlogFooter($footer);
+        $this->_assertIsNotPhlogFooter($footer);
     }
 
     /* Custom Assertions */
 
-    private function assertIsPhlogHeader(GopherItem $item)
+    private function _assertIsPhlogHeader(GopherItem $item)
     {
         $this->assertTrue($item->isPhlogHeader());
     }
 
-    private function assertIsNotPhlogHeader(GopherItem $item)
+    private function _assertIsNotPhlogHeader(GopherItem $item)
     {
         $this->assertFalse($item->isPhlogHeader());
     }
 
-    private function assertIsPhlogFooter(GopherItem $item)
+    private function _assertIsPhlogFooter(GopherItem $item)
     {
         $this->assertTrue($item->isPhlogFooter());
     }
 
-    private function assertIsNotPhlogFooter(GopherItem $item)
+    private function _assertIsNotPhlogFooter(GopherItem $item)
     {
         $this->assertFalse($item->isPhlogFooter());
     }

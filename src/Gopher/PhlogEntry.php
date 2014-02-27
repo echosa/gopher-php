@@ -5,10 +5,10 @@ use Gopher\Exception\NotPhlogHeaderException;
 
 class PhlogEntry
 {
-    private $title;
-    private $footer;
-    private $date;
-    private $bodyItems = array();
+    private $_title;
+    private $_footer;
+    private $_date;
+    private $_bodyItems = array();
 
     public function __construct(GopherItem $title)
     {
@@ -16,41 +16,41 @@ class PhlogEntry
             throw new NotPhlogHeaderException();
         }
 
-        $this->title = $title;
+        $this->_title = $title;
     }
 
     public function addBodyItem(GopherItem $item)
     {
-        $this->bodyItems[] = $item;
+        $this->_bodyItems[] = $item;
     }
 
     public function getBodyItems()
     {
-        return $this->bodyItems;
+        return $this->_bodyItems;
     }
 
     public function getTitle()
     {
-        return $this->title;
+        return $this->_title;
     }
 
     public function getFooter()
     {
-        return $this->footer;
+        return $this->_footer;
     }
 
     public function setFooter(GopherItem $footer)
     {
-        $this->footer = $footer;
+        $this->_footer = $footer;
     }
 
     public function getDate()
     {
-        return $this->date;
+        return $this->_date;
     }
 
     public function setDate(GopherItem $date)
     {
-        $this->date = $date;
+        $this->_date = $date;
     }
 }

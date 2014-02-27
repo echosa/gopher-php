@@ -33,27 +33,27 @@ class PhlogMapTest extends \PHPUnit_Framework_TestCase
 
     public function testPhlogMapParsesTitlesCorrectly()
     {
-        $entries = $this->getPhlogEntries();
+        $entries = $this->_getPhlogEntries();
         $this->assertCount(3, $entries);
-        $this->assertTitle('--Rogue--', $entries[0]);
-        $this->assertTitle('--Infinity Blade III--', $entries[1]);
-        $this->assertTitle('--Bitmessage--', $entries[2]);
+        $this->_assertTitle('--Rogue--', $entries[0]);
+        $this->_assertTitle('--Infinity Blade III--', $entries[1]);
+        $this->_assertTitle('--Bitmessage--', $entries[2]);
     }
 
     public function testPhlogMapParsesFootersCorrectly()
     {
-        $entries = $this->getPhlogEntries();
-        $this->assertFooter('0006-rogue', $entries[0]);
-        $this->assertFooter('0005-infinity-blade-3', $entries[1]);
-        $this->assertFooter('0004-bitmessage', $entries[2]);
+        $entries = $this->_getPhlogEntries();
+        $this->_assertFooter('0006-rogue', $entries[0]);
+        $this->_assertFooter('0005-infinity-blade-3', $entries[1]);
+        $this->_assertFooter('0004-bitmessage', $entries[2]);
     }
 
     public function testPhlogMapParsesDatesCorrectly()
     {
-        $entries = $this->getPhlogEntries();
-        $this->assertDate('Thursday, September 26th, 2013', $entries[0]);
-        $this->assertDate('Monday, September 23th, 2013', $entries[1]);
-        $this->assertDate('Thursday, August 29th, 2013', $entries[2]);
+        $entries = $this->_getPhlogEntries();
+        $this->_assertDate('Thursday, September 26th, 2013', $entries[0]);
+        $this->_assertDate('Monday, September 23th, 2013', $entries[1]);
+        $this->_assertDate('Thursday, August 29th, 2013', $entries[2]);
     }
 
     public function testGettingPhlogEntryForFile()
@@ -61,7 +61,7 @@ class PhlogMapTest extends \PHPUnit_Framework_TestCase
         $gopher = new Gopher(GopherProviders::GOPHER_MAP);
         $this->_phlogMap->parseGopher($gopher);
         $entry = $this->_phlogMap->getEntryForFile('0005-infinity-blade-3');
-        $this->assertTitle('--Infinity Blade III--', $entry);
+        $this->_assertTitle('--Infinity Blade III--', $entry);
 
         $entries = $this->_phlogMap->getEntries();
         $this->assertSame($entry, $entries[1]);
@@ -80,7 +80,7 @@ class PhlogMapTest extends \PHPUnit_Framework_TestCase
         $this->_phlogMap->parseGopher(new Gopher(GopherProviders::GOPHER_MAP));
         $entries = $this->_phlogMap->getPage(2,1);
         $this->assertCount(1, $entries);
-        $this->assertTitle('--Infinity Blade III--', $entries[0]);
+        $this->_assertTitle('--Infinity Blade III--', $entries[0]);
     }
 
     public function testPaginationReturnsOnlyThirdItem()
@@ -88,36 +88,36 @@ class PhlogMapTest extends \PHPUnit_Framework_TestCase
         $this->_phlogMap->parseGopher(new Gopher(GopherProviders::GOPHER_MAP));
         $entries = $this->_phlogMap->getPage(2,2);
         $this->assertCount(1, $entries);
-        $this->assertTitle('--Bitmessage--', $entries[0]);
+        $this->_assertTitle('--Bitmessage--', $entries[0]);
     }
 
     /* Custom Assertions */
 
-    private function assertTitle($expectedTitle, $entry)
+    private function _assertTitle($expectedTitle, $entry)
     {
         $this->assertEquals($expectedTitle, $entry->getTitle()->getText());
     }
 
-    private function assertFooter($filename, $entry)
+    private function _assertFooter($filename, $entry)
     {
-        $this->assertEquals($this->getPhlogFooter($filename), $entry->getFooter());
+        $this->assertEquals($this->_getPhlogFooter($filename), $entry->getFooter());
     }
 
-    private function assertDate($dateString, $entry)
+    private function _assertDate($dateString, $entry)
     {
         $this->assertEquals($dateString, trim($entry->getDate()->getText()));
     }
 
     /* Helper Functions */
 
-    private function getPhlogEntries()
+    private function _getPhlogEntries()
     {
         $gopher = new Gopher(GopherProviders::GOPHER_MAP);
         $this->_phlogMap->parseGopher($gopher);
         return $this->_phlogMap->getEntries();
     }
 
-    private function getPhlogFooter($filename)
+    private function _getPhlogFooter($filename)
     {
         $footer = new GopherItem('Continued...');
         $footer->setFileUrl($filename);

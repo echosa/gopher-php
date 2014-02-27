@@ -8,43 +8,43 @@ class GopherItem
     const PHLOG_HEADER_REGEXP = '/^--.*--$/';
     const PHLOG_FOOTER_REGEXP = '/^Continued\.\.\.$/';
 
-    private $text;
-    private $url;
-    private $urlType;
+    private $_text;
+    private $_url;
+    private $_urlType;
 
     public function __construct($text = '' )
     {
-        $this->text = $text;
+        $this->_text = $text;
     }
 
     public function getText()
     {
-        return $this->text;
+        return $this->_text;
     }
 
     public function setText($text)
     {
-        $this->text = $text;
+        $this->_text = $text;
     }
 
     public function getUrl()
     {
-        return $this->url;
+        return $this->_url;
     }
 
     public function getUrlType()
     {
-        return $this->urlType;
+        return $this->_urlType;
     }
 
     public function setFileUrl($url)
     {
-        $this->setUrl($url, self::FILE);
+        $this->_setUrl($url, self::FILE);
     }
 
     public function setDirectoryUrl($url)
     {
-        $this->setUrl($url, self::DIR);
+        $this->_setUrl($url, self::DIR);
     }
 
     public function isPhlogHeader()
@@ -59,9 +59,9 @@ class GopherItem
             && self::FILE == $this->getUrlType();
     }
 
-    private function setUrl($url, $type)
+    private function _setUrl($url, $type)
     {
-        $this->url = $url;
-        $this->urlType = $type;
+        $this->_url = $url;
+        $this->_urlType = $type;
     }
 }
