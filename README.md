@@ -24,7 +24,7 @@ retrieved.
 
 ```
 $gopherFile = new \Gopher\GopherFile('/path/to/gopher/file');
-foreach ($gopherFile->getItems() as $item) {
+foreach ($gopherFile as $item) {
     if (null != $item->getUrl()) {
         echo 'Item is a link to ' . $item->getUrl() . ' with the label of '
            . $item->getText();
@@ -49,7 +49,7 @@ entry's title, body, footer, and date.
 
 ```
 $phlogMapFile = new \Gopher\PhlogMapFile('/path/to/phlogmap');
-foreach ($phlogMapFile->getEntries() as $entry) {
+foreach ($phlogMapFile as $entry) {
     echo 'Entry title: ' . $entry->getTitle() . PHP_EOL;
     echo 'Entry date: ' . $entry->getDate() . PHP_EOL;
     foreach ($entry->getBodyItems() as $item) {
