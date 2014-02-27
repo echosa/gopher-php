@@ -12,9 +12,14 @@ class GopherTest extends \PHPUnit_Framework_TestCase
         $this->gopher = new Gopher(GopherProviders::GOPHER_MAP);
     }
 
+    public function testGopherObjectShouldImplementIterator()
+    {
+        $this->assertInstanceOf('Iterator', $this->gopher);
+    }
+
     public function testGopherMapIsParsedCorrectly()
     {
-        $this->assertCount(18, $this->gopher->getItems());
+        $this->assertCount(18, $this->gopher);
         $this->assertEquals('--Rogue--', $this->gopher->getItem(0)->getText());
         $this->assertEquals('--Infinity Blade III--', $this->gopher->getItem(5)->getText());
         $this->assertEquals('--Bitmessage--', $this->gopher->getItem(14)->getText());

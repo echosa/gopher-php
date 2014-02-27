@@ -3,9 +3,10 @@ namespace Gopher;
 
 use Gopher\Exception\FileNotReadableException;
 
-class Gopher
+class Gopher implements \Iterator
 {
-    private $items = array();
+    private $_items = array();
+    private $_position = 0;
 
     public function __construct($text = null)
     {
@@ -16,12 +17,12 @@ class Gopher
 
     public function getItems()
     {
-        return $this->items;
+        return $this->_items;
     }
 
     public function getItem($index)
     {
-        return $this->items[$index];
+        return $this->_items[$index];
     }
 
     public function parse($text)
@@ -46,8 +47,32 @@ class Gopher
                     break;
                 }
             }
-            $this->items[] = $item;
+            $this->_items[] = $item;
         }
     }
 
+    public function current()
+    {
+        return $this->_items[$this->_position];
+    }
+
+    public function next()
+    {
+        ++$this->_position;
+    }
+
+    public function rewind()
+    {
+        $this->_position = 0;
+    }
+
+    public function key()
+    {
+        return $this->_position;
+    }
+
+    public function valid()
+    {
+        return isset($this->_items[$this->_position]);
+    }
 }
