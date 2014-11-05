@@ -5,6 +5,7 @@ class GopherItem
 {
     const FILE = 'file';
     const DIR = 'dir';
+    const HTTP = 'http';
     const PHLOG_HEADER_REGEXP = '/^--.*--$/';
     const PHLOG_FOOTER_REGEXP = '/^Continued\.\.\.$/';
 
@@ -47,6 +48,11 @@ class GopherItem
         $this->_setUrl($url, self::DIR);
     }
 
+    public function setHttpUrl($url)
+    {
+        $this->_setUrl($url, self::HTTP);
+    }
+
     public function isPhlogHeader()
     {
         return 1 == preg_match(self::PHLOG_HEADER_REGEXP, $this->getText())
@@ -56,7 +62,7 @@ class GopherItem
     public function isPhlogFooter()
     {
         return 1 == preg_match(self::PHLOG_FOOTER_REGEXP, $this->getText())
-            && self::FILE == $this->getUrlType();
+            && (self::FILE == $this->getUrlType() || self::DIR == $this->getUrlType());
     }
 
     private function _setUrl($url, $type)

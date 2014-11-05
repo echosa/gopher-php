@@ -42,6 +42,11 @@ class Gopher implements \Iterator
                     $item->setText(substr($lineArray[0], 1));
                     $item->setDirectoryUrl($lineArray[1]);
                     break;
+                case 'h':
+                    $lineArray = explode("\t", $line);
+                    $item->setText(substr($lineArray[0], 1));
+                    $item->setHttpUrl(substr($lineArray[1], 6));
+                    break;
                 default:
                     $item->setText($line);
                     break;
