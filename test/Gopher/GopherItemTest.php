@@ -55,11 +55,11 @@ class GopherItemTest extends \PHPUnit_Framework_TestCase
         $this->_assertIsNotPhlogFooter(new GopherItem($this->_footerText));
     }
 
-    public function testDirectoryItemIsNotAFooter()
+    public function testDirectoryItemIsAFooter()
     {
         $footer = new GopherItem($this->_footerText);
         $footer->setDirectoryUrl('foo');
-        $this->_assertIsNotPhlogFooter($footer);
+        $this->_assertIsPhlogFooter($footer);
     }
 
     public function testWrongTextIsNotAFooter()
