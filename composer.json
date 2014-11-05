@@ -1,6 +1,7 @@
 {
     "name": "echosa/gopher-php",
     "description": "This is a GOPHER reading and parsing library for PHP.",
+    "version": "0.3",
     "require-dev": {
         "phpunit/phpunit": "3.7.27"
     },
