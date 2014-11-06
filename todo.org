@@ -1,2 +1,0 @@
-* gopher-php TODO list
-** TODO Refactor out strings and heredocs in unit tests
