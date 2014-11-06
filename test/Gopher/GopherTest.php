@@ -45,4 +45,14 @@ gophertext;
         $item = $gopher->current();
         $this->assertEquals('http://www.duckduckgo.com', $item->getUrl());
     }
+
+    public function testHttpLinksAreNotIncorrectlyIdentified()
+    {
+        $text = <<<gophertext
+hThis is not a link.
+gophertext;
+        $gopher = new Gopher($text);
+        $item = $gopher->current();
+        $this->assertNull($item->getUrl());
+    }
 }

@@ -43,9 +43,14 @@ class Gopher implements \Iterator
                     $item->setDirectoryUrl($lineArray[1]);
                     break;
                 case 'h':
-                    $lineArray = explode("\t", $line);
-                    $item->setText(substr($lineArray[0], 1));
-                    $item->setHttpUrl(substr($lineArray[1], 4));
+                    $urlArray = explode('URL:', $line);
+                    if (2 == count($urlArray)) {
+                        $lineArray = explode("\t", $line);
+                        $item->setText(substr($lineArray[0], 1));
+                        $item->setHttpUrl($urlArray[1]);
+                    } else {
+                        $item->setText($line);
+                    }
                     break;
                 default:
                     $item->setText($line);
