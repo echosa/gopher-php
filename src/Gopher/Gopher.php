@@ -45,7 +45,7 @@ class Gopher implements \Iterator
                 case 'h':
                     $lineArray = explode("\t", $line);
                     $item->setText(substr($lineArray[0], 1));
-                    $item->setHttpUrl(substr($lineArray[1], 6));
+                    $item->setHttpUrl(substr($lineArray[1], 4));
                     break;
                 default:
                     $item->setText($line);

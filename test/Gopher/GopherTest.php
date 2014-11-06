@@ -35,4 +35,14 @@ class GopherTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(GopherItem::FILE, $item->getUrlType());
         $this->assertEquals($url, $item->getUrl());
     }
+    
+    public function testHttpLinksAreParsedCorrectly()
+    {
+        $text = <<<gophertext
+hA Link	URL:http://www.duckduckgo.com
+gophertext;
+        $gopher = new Gopher($text);
+        $item = $gopher->current();
+        $this->assertEquals('http://www.duckduckgo.com', $item->getUrl());
+    }
 }
