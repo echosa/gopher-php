@@ -52,6 +52,9 @@ class Gopher implements \Iterator
                         $item->setText($line);
                     }
                     break;
+                case 'i':
+                    $item->setText(trim(substr($line, 1)));
+                    break;
                 default:
                     $item->setText($line);
                     break;

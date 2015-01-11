@@ -4,12 +4,12 @@ namespace Gopher\Providers;
 class GopherProviders
 {
     const GOPHER_MAP = <<<gophermap
---Rogue--
+i--Rogue--	
     Thursday, September 26th, 2013
 Ah, Rogue. One of the greatest games ever. You've sucked me back in.
 0Continued...	0006-rogue
 
---Infinity Blade III--
+i--Infinity Blade III--	
     Monday, September 23th, 2013
 Holy cow, is this game awesome. I'm only about an hour in, and already the
 story is great, the music and graphics are incredible, the gameplay is
@@ -18,7 +18,7 @@ excellent follow-up to Infinity Blade 2 and has only solidified how much of a
 fan of the series I am.
 0Continued...	0005-infinity-blade-3
 
---Bitmessage--
+i--Bitmessage--	
     Thursday, August 29th, 2013
 So, if you are looking into using or trying out bitmessage, think again.
 0Continued...	0004-bitmessage
